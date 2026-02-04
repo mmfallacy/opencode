@@ -4,13 +4,34 @@ export default {
   //       marked with for example `; inherits: ecma` at the top of the file. Just put the dependencies before the actual query.
   //       ALSO: Some queries use breaking changes in the nvim-treesitter repo, that are not compatible with the (web-)tree-sitter parser.
   parsers: [
+    // Use javascript wasm and jsx highlights to parse jsx
+    {
+      filetype: "jsx",
+      wasm: "https://github.com/tree-sitter/tree-sitter-javascript/releases/download/v0.25.0/tree-sitter-javascript.wasm",
+      queries: {
+        highlights: [
+          "https://raw.githubusercontent.com/tree-sitter/tree-sitter-javascript/refs/heads/master/queries/highlights-jsx.scm",
+          "https://raw.githubusercontent.com/tree-sitter/tree-sitter-javascript/refs/heads/master/queries/highlights.scm",
+          "https://raw.githubusercontent.com/tree-sitter/tree-sitter-javascript/refs/heads/master/queries/highlights-params.scm",
+        ],
+      },
+    },
+    // Use typescript wasm and typescript highlights to parse tsx
+    {
+      filetype: "tsx",
+      wasm: "https://github.com/tree-sitter/tree-sitter-typescript/releases/download/v0.23.2/tree-sitter-tsx.wasm",
+      queries: {
+        highlights: [
+          "https://raw.githubusercontent.com/anomalyco/opentui/refs/heads/main/packages/core/src/lib/tree-sitter/assets/typescript/highlights.scm",
+        ],
+      },
+    },
     {
       filetype: "python",
       wasm: "https://github.com/tree-sitter/tree-sitter-python/releases/download/v0.23.6/tree-sitter-python.wasm",
       queries: {
         highlights: [
-          // NOTE: This nvim-treesitter query is currently broken, because the parser is not compatible with the query apparently.
-          //       it is using "except" nodes that the parser is complaining about, but it has been in the query for 3+ years.
+          // NOTE: This nvim-treesitter query is currently broken, because the parser is not compatible with the query apparently. it is using "except" nodes that the parser is complaining about, but it has been in the query for 3+ years.
           //       Unclear.
           // "https://raw.githubusercontent.com/nvim-treesitter/nvim-treesitter/refs/heads/master/queries/python/highlights.scm",
           "https://github.com/tree-sitter/tree-sitter-python/raw/refs/heads/master/queries/highlights.scm",
